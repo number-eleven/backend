@@ -30,8 +30,6 @@ class BaseModel(db.Model):
 
 
 class User(BaseModel, db.Model):
-    # overwrites default table name which is CamelCase -> camel_case
-    __tablename__ = "User"
 
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(80), unique=True, nullable=False)
@@ -40,18 +38,27 @@ class User(BaseModel, db.Model):
     email = db.Column(db.String(254), unique=True, nullable=False)
     password = db.Column(db.String(256), nullable=False)
     read_receipts_on = db.Column(db.Boolean(254), nullable=False)
+    message = db.relationship("Message", uselist=False, backref="user")
 
 
 class Chat(BaseModel, db.Model):
-    __tablename__ = "Chat"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=True)
     is_group = db.Column(db.Boolean, nullable=False)
+    message = db.relationship("Message", uselist=False, backref="chat")
 
-# class Message(BaseModel, db.Model):
-#     __tablename__ = "Message"
 
-#     id = db.Column(db.Integer, primary_key = True)
-#     user_id = db.Column(db.Integer, db.ForeignKey(''))
-#
+class Message(BaseModel, db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    chat_id = db.Column(db.Integer, db.ForeignKey("chat.id"), nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
+    content = db.Column(db.String(5000), nullable=False)
+
+
+# many to many relationship? I'm hecking confused, idk how to configure this
+ReactionMessage = db.Table("reaction_message",
+                           db.Column(message_id, db.Integer, db.ForeignKey)
+                           )
