@@ -5,8 +5,11 @@ verify_ssl = true
 
 [scripts]
 start = "python app.py"
+lint = "pylint app api"
 
 [dev-packages]
+pylint = "*"
+autopep8 = "*"
 
 [packages]
 flask = "*"
