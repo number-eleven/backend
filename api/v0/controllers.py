@@ -1,16 +1,16 @@
-def get_user(id):
+def get_user(user_id):
     return {
-        'id': id
+        'id': user_id
     }
 
 
-def get_chat(id):
+def get_chat(chat_id):
     return {
-        'id': id
+        'id': chat_id
     }
 
 
-def get_message(id):
+def get_message(message_id):
     return {
-        'id': id
+        'id': message_id
     }

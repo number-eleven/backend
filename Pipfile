@@ -5,7 +5,7 @@ verify_ssl = true
 
 [scripts]
 start = "python app.py"
-lint = "pylint app api"
+lint = "pylint --rcfile='./.pylintrc' app api"
 
 [dev-packages]
 pylint = "*"
