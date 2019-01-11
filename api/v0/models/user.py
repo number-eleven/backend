@@ -1,4 +1,5 @@
-from .models import Base
+from . import Base
+
 
 class User(Base):
     pass
